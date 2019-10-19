@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_bg"
+    tools:context=".AddExpenseActivity">
+
+
+
+    <ImageView
+        android:id="@+id/backIv"
+        android:onClick="backIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_chevron_left_black_24dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:text="Add Expense"
+        android:layout_toRightOf="@+id/backIv"
+        android:layout_marginTop="10dp"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/backIv"
+        android:layout_centerInParent="true"/>
+    <LinearLayout
+        android:id="@+id/horizontalLyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/addExpenseEt"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <EditText
+            android:id="@+id/dateEt"
+            android:background="#1AFFFFFF"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:hint="Date"
+            android:padding="15dp"
+            android:textColorHint="#B3B6B7"
+            android:focusable="false"/>
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="0dp"/>
+
+        <EditText
+            android:id="@+id/timeEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:hint="Time (Optional)"
+            android:background="#1AFFFFFF"
+            android:padding="15dp"
+            android:textColorHint="#B3B6B7"
+            android:focusable="false"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:padding="15dp"
+        android:id="@+id/addExpenseEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="#1AFFFFFF"
+        android:hint="Enter Expense Amount"
+        android:inputType="number"
+        android:textColorHint="#B3B6B7"
+        android:textColor="#FFFFFF"/>
+
+    <ImageView
+        android:id="@+id/documentIv"
+        android:scaleType="fitXY"
+        android:layout_below="@+id/cancelDocumentBtn"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_image_black_24dp"/>
+
+    <Button
+        android:id="@+id/addDocumentBtn"
+        android:onClick="addDocumentBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Image (Optional)"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/horizontalLyt"
+        android:background="@drawable/curve_btn"
+        />
+
+    <Button
+        android:id="@+id/cancelDocumentBtn"
+        android:onClick="cancelDocumentBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel Adding Image"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/horizontalLyt"
+        android:background="@drawable/curve_btn"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/saveBtnUpper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/addDocumentBtn"
+        android:background="@drawable/curve_btn"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/buttonLyt"
+        android:layout_below="@+id/documentIv"
+        android:layout_marginTop="5dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/gotoGalleryBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="Gallery"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/curve_btn"
+            />
+        <View
+            android:layout_width="10dp"
+            android:layout_height="0dp"/>
+        <Button
+            android:id="@+id/gotoCameraBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="Camera"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/curve_btn"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/buttonLyt"
+        android:background="@drawable/curve_btn"
+        android:visibility="gone"/>
+
+</RelativeLayout>
