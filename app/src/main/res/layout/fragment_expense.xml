@@ -76,16 +76,6 @@
         android:layout_marginTop="8dp"/>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addExpenseBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_black_24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="30dp"
-        android:background="#630A74"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"

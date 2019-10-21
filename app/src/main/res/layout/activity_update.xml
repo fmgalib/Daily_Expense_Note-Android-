@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"
-                android:text="Add Expense"
+                android:text="Update Expense"
                 android:layout_toRightOf="@+id/backIv" />
 
         </RelativeLayout>
@@ -133,16 +133,16 @@
             android:src="@drawable/ic_image_black_24dp"/>
 
 
-    <ImageView
-        android:id="@+id/documentIv"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:visibility="gone" />
+        <ImageView
+            android:id="@+id/documentIv"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

@@ -2,6 +2,7 @@ package com.htdeveloper.dailyexpensenote;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -15,10 +16,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static String COL_NAME = "Name";
     public static String COL_AMOUNT = "Amount";
     public static String COL_DATE = "Date";
-    public static String COL_TIME = "Time";
+
 
     private static int VERSION = 1;
-    private String createTable = "create table "+TABLE_NAME+"(Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Amount TEXT, Date TEXT, Time TEXT)";
+    private String createTable = "create table "+TABLE_NAME+"(Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Amount TEXT, Date TEXT)";
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -35,16 +36,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public long insertData(String name, String amount, String date, String time){
+    public long insertData(String name, String amount, String date){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_NAME, name);
         contentValues.put(COL_AMOUNT, amount);
         contentValues.put(COL_DATE, date);
-        contentValues.put(COL_TIME, time);
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         long id = sqLiteDatabase.insert(TABLE_NAME,null,contentValues);
         sqLiteDatabase.close();
         return id;
+    }
+
+    public Cursor showData(){
+
+        String show_all ="select * From "+TABLE_NAME;
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(show_all,null);
+        return cursor;
     }
 }

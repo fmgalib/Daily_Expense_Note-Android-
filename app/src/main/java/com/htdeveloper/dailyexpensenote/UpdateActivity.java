@@ -1,18 +1,12 @@
 package com.htdeveloper.dailyexpensenote;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.renderscript.Sampler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddExpenseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class UpdateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private ImageView backIv, documentIv, coverImage;
     private EditText addExpenseEt, dateEt, timeEt;
@@ -45,29 +38,28 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_expense);
+        setContentView(R.layout.activity_update);
 
         init();
         spinnerClicked();
-        
+
         dateEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDatePicker();
             }
         });
-        
+
         timeEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openTimePicker();
             }
         });
-
     }
 
     private void openTimePicker() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(AddExpenseActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
 
         View view = getLayoutInflater().inflate(R.layout.custom_time_picker,null);
 
@@ -96,7 +88,6 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
             }
         });
     }
-
 
     private void openDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener =
@@ -130,15 +121,12 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(AddExpenseActivity.this, dateSetListener, year, month, day);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateActivity.this, dateSetListener, year, month, day);
         datePickerDialog.show();
     }
 
-
-
-
     private void spinnerClicked() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(AddExpenseActivity.this,R.array.expenses, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(UpdateActivity.this,R.array.expenses, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
@@ -164,11 +152,9 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
         helper = new DatabaseHelper(this);
     }
 
-
     public void backIv(View view) {
         onBackPressed();
     }
-
 
     @Override
     public void onItemSelected(final AdapterView<?> adapterView, View view, final int i, long l) {
@@ -176,13 +162,13 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
         saveBtnUpper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 expenseName = adapterView.getItemAtPosition(i).toString();
-                 expenseAmount = addExpenseEt.getText().toString();
-                 date = dateEt.getText().toString();
-               //  time = timeEt.getText().toString();
+                expenseName = adapterView.getItemAtPosition(i).toString();
+                expenseAmount = addExpenseEt.getText().toString();
+                date = dateEt.getText().toString();
+                //  time = timeEt.getText().toString();
 
-                 long id = helper.insertData(expenseName,expenseAmount,date);
-                 Toast.makeText(AddExpenseActivity.this, "Expense ID "+id, Toast.LENGTH_LONG).show();
+                long id = helper.insertData(expenseName,expenseAmount,date);
+                Toast.makeText(UpdateActivity.this, "Expense ID "+id, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -192,85 +178,17 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
                 expenseName = adapterView.getItemAtPosition(i).toString();
                 expenseAmount = addExpenseEt.getText().toString();
                 date = dateEt.getText().toString();
-              //  time = timeEt.getText().toString();
+                //  time = timeEt.getText().toString();
 
                 long id = helper.insertData(expenseName,expenseAmount,date);
-                Toast.makeText(AddExpenseActivity.this, "Expense ID "+id, Toast.LENGTH_LONG).show();
+                Toast.makeText(UpdateActivity.this, "Expense ID "+id, Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
-
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
+    public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-
-
-    public void addDocumentBtn(View view) {
-        documentIv.setVisibility(View.VISIBLE);
-        coverImage.setVisibility(View.VISIBLE);
-        buttonLyt.setVisibility(View.VISIBLE);
-        saveBtn.setVisibility(View.VISIBLE);
-        saveBtnUpper.setVisibility(View.INVISIBLE);
-        cancelDocumentBtn.setVisibility(View.VISIBLE);
-        addDocumentBtn.setVisibility(View.INVISIBLE);
-    }
-
-    public void cancelDocumentBtn(View view) {
-        documentIv.setImageResource(0);
-        crossBtn.setVisibility(View.INVISIBLE);
-        coverImage.setVisibility(View.INVISIBLE);
-        documentIv.setVisibility(View.INVISIBLE);
-        buttonLyt.setVisibility(View.INVISIBLE);
-        saveBtn.setVisibility(View.INVISIBLE);
-        saveBtnUpper.setVisibility(View.VISIBLE);
-        cancelDocumentBtn.setVisibility(View.INVISIBLE);
-        addDocumentBtn.setVisibility(View.VISIBLE);
-    }
-
-
-    public void gotoCameraBtn(View view) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,0);
-    }
-
-    public void gotoGalleryBtn(View view) {
-        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        startActivityForResult(intent,1);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == RESULT_OK){
-
-            if(requestCode ==0){
-
-                Bundle bundle = data.getExtras();
-                Bitmap bitmap = (Bitmap) bundle.get("data");
-                documentIv.setImageBitmap(bitmap);
-                crossBtn.setVisibility(View.VISIBLE);
-                crossBtn.setVisibility(View.INVISIBLE);
-
-            }
-            else if(requestCode == 1){
-
-                Uri uri = data.getData();
-                documentIv.setImageURI(uri);
-                crossBtn.setVisibility(View.VISIBLE);
-                coverImage.setVisibility(View.INVISIBLE);
-            }
-        }
-
-    }
-
-    public void crossBtn(View view) {
-        documentIv.setImageResource(0);
-        crossBtn.setVisibility(View.INVISIBLE);
-        coverImage.setVisibility(View.VISIBLE);
     }
 }
