@@ -106,10 +106,30 @@
         android:textColor="#000000"
         />
 
+    <RelativeLayout
+        android:id="@+id/relativeLyt"
+        android:layout_below="@+id/cancelDocumentBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/crossBtn"
+            android:onClick="crossBtn"
+            android:layout_alignParentRight="true"
+            android:elevation="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:text="X"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/cross_btn"
+            android:visibility="gone"/>
+
+
     <ImageView
         android:id="@+id/documentIv"
+        android:padding="8dp"
         android:scaleType="fitCenter"
-        android:layout_below="@+id/cancelDocumentBtn"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -117,6 +137,8 @@
         android:layout_height="200dp"
         android:visibility="gone"
         android:src="@drawable/ic_image_black_24dp"/>
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/addDocumentBtn"
@@ -171,7 +193,7 @@
         android:layout_marginLeft="5dp"
         android:orientation="horizontal"
         android:id="@+id/buttonLyt"
-        android:layout_below="@+id/documentIv"
+        android:layout_below="@+id/relativeLyt"
         android:layout_marginTop="5dp"
         android:visibility="gone">
 

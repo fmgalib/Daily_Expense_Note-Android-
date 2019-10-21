@@ -36,7 +36,7 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
 
     private ImageView backIv, documentIv;
     private EditText addExpenseEt, dateEt, timeEt;
-    private Button addDocumentBtn, saveBtnUpper, gotoGalleryBtn, gotoCameraBtn, saveBtn, cancelDocumentBtn;
+    private Button addDocumentBtn, saveBtnUpper, gotoGalleryBtn, gotoCameraBtn, saveBtn, cancelDocumentBtn, crossBtn;
     private Spinner spinner;
     private LinearLayout buttonLyt;
     private String expenseName, expenseAmount, date, time;
@@ -156,6 +156,7 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
         gotoGalleryBtn = findViewById(R.id.gotoGalleryBtn);
         gotoCameraBtn = findViewById(R.id.gotoCameraBtn);
         saveBtn = findViewById(R.id.saveBtn);
+        crossBtn = findViewById(R.id.crossBtn);
         spinner = findViewById(R.id.spinner);
         buttonLyt = findViewById(R.id.buttonLyt);
         cancelDocumentBtn = findViewById(R.id.cancelDocumentBtn);
@@ -203,6 +204,8 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
     }
 
     public void cancelDocumentBtn(View view) {
+        documentIv.setImageResource(0);
+        crossBtn.setVisibility(View.INVISIBLE);
         documentIv.setVisibility(View.INVISIBLE);
         buttonLyt.setVisibility(View.INVISIBLE);
         saveBtn.setVisibility(View.INVISIBLE);
@@ -234,14 +237,21 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
                 Bundle bundle = data.getExtras();
                 Bitmap bitmap = (Bitmap) bundle.get("data");
                 documentIv.setImageBitmap(bitmap);
+                crossBtn.setVisibility(View.VISIBLE);
 
             }
             else if(requestCode == 1){
 
                 Uri uri = data.getData();
                 documentIv.setImageURI(uri);
+                crossBtn.setVisibility(View.VISIBLE);
             }
         }
 
+    }
+
+    public void crossBtn(View view) {
+        documentIv.setImageResource(0);
+        crossBtn.setVisibility(View.INVISIBLE);
     }
 }
