@@ -1,6 +1,10 @@
 package com.htdeveloper.dailyexpensenote;
 
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,10 +16,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -25,6 +38,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
     private Spinner spinner;
     private FloatingActionButton addExpenseBtn;
+    private TextView fromDateTv, toDateTv;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -39,6 +53,8 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
         addExpenseBtn = view.findViewById(R.id.addExpenseBtn);
         spinner = view.findViewById(R.id.spinner);
+        fromDateTv = view.findViewById(R.id.fromDateTv);
+        toDateTv = view.findViewById(R.id.toDateTv);
 
         addExpenseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,10 +70,98 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         spinner.setOnItemSelectedListener(this);
 
 
+        fromDateTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDatePickerFrom();
+            }
+        });
+
+        toDateTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDatePickerTo();
+            }
+        });
+
+
 
         return view;
     }
 
+    private void openDatePickerFrom() {
+        DatePickerDialog.OnDateSetListener dateSetListener =
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                        month = month + 1;
+
+                        String currentDate = year+"/"+month+"/"+day;
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+                        Date date = null;
+
+                        try {
+                            date = dateFormat.parse(currentDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        fromDateTv.setText(dateFormat.format(date));
+                        long millisec = date.getTime();
+                    }
+                };
+
+        Calendar calendar = Calendar.getInstance();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), dateSetListener, year, month, day);
+        datePickerDialog.show();
+    }
+
+
+    private void openDatePickerTo() {
+            DatePickerDialog.OnDateSetListener dateSetListener =
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                            month = month + 1;
+
+                            String currentDate = year+"/"+month+"/"+day;
+
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+                            Date date = null;
+
+                            try {
+                                date = dateFormat.parse(currentDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            toDateTv.setText(dateFormat.format(date));
+                            long millisec = date.getTime();
+                        }
+                    };
+
+            Calendar calendar = Calendar.getInstance();
+
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), dateSetListener, year, month, day);
+            datePickerDialog.show();
+
+    }
 
 
     @Override

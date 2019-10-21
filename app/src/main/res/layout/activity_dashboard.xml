@@ -7,25 +7,14 @@
     tools:context=".DashboardActivity"
     android:background="#FFFFFF">
 
-    <TextView
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:text="Daily Expense"
-        android:textSize="20sp"
-        android:layout_marginTop="25dp"
-        android:elevation="5.1dp"
-        android:background="@drawable/transperent_btn"
-        android:drawableTop="@drawable/ic_monetization_on_black_24dp"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/topCardView"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="5dp">
+        app:cardElevation="5dp"
+        >
 
     <LinearLayout
         android:layout_width="match_parent"
