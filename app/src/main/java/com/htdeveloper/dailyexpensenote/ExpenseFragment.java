@@ -38,7 +38,6 @@ public class ExpenseFragment extends Fragment implements AdapterView.OnItemSelec
     private Spinner spinner;
     private TextView fromDateTv, toDateTv;
     private RecyclerView recyclerView;
-    private ImageView menuIv;
     private ExpenseAdapter adapter;
     private List<Expense> expenses;
     private DatabaseHelper helper;
@@ -59,7 +58,7 @@ public class ExpenseFragment extends Fragment implements AdapterView.OnItemSelec
         fromDateTv = view.findViewById(R.id.fromDateTv);
         toDateTv = view.findViewById(R.id.toDateTv);
 
-        menuIv = view.findViewById(R.id.menuIv);
+
         recyclerView = view.findViewById(R.id.expenseListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         expenses = new ArrayList<>();

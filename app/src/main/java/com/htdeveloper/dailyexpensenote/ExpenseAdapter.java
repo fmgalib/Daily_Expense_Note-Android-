@@ -41,11 +41,22 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        Expense expense = expenses.get(position);
+        final Expense expense = expenses.get(position);
 
         holder.nameTv.setText(expense.getExpenseName());
         holder.amountTv.setText(expense.getExpenseAmount());
         holder.dateTv.setText(String.valueOf(expense.getDate()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailsActivity.class);
+                intent.putExtra("name",expense.getExpenseName());
+                intent.putExtra("amount",expense.getExpenseAmount());
+                intent.putExtra("date",expense.getDate());
+                context.startActivity(intent);
+            }
+        });
 
 
     }
@@ -62,7 +73,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
 
         private TextView nameTv, dateTv, amountTv;
-        private ImageView menuIv;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,7 +81,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
             nameTv = itemView.findViewById(R.id.nameTv);
             dateTv = itemView.findViewById(R.id.dateTv);
             amountTv = itemView.findViewById(R.id.amountTv);
-            menuIv = itemView.findViewById(R.id.menuIv);
+
 
         }
     }

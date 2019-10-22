@@ -175,20 +175,20 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
 
         saveBtnUpper.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {                           //without image
                  expenseName = adapterView.getItemAtPosition(i).toString();
                  expenseAmount = addExpenseEt.getText().toString();
                  date = dateEt.getText().toString();
                //  time = timeEt.getText().toString();
 
                  long id = helper.insertData(expenseName,expenseAmount,date);
-                 Toast.makeText(AddExpenseActivity.this, "Expense ID "+id, Toast.LENGTH_LONG).show();
+                 Toast.makeText(AddExpenseActivity.this, "Expense Added", Toast.LENGTH_LONG).show();
             }
         });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {                                 //with image
                 expenseName = adapterView.getItemAtPosition(i).toString();
                 expenseAmount = addExpenseEt.getText().toString();
                 date = dateEt.getText().toString();
@@ -254,7 +254,7 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
                 Bitmap bitmap = (Bitmap) bundle.get("data");
                 documentIv.setImageBitmap(bitmap);
                 crossBtn.setVisibility(View.VISIBLE);
-                crossBtn.setVisibility(View.INVISIBLE);
+                //crossBtn.setVisibility(View.INVISIBLE);
 
             }
             else if(requestCode == 1){
